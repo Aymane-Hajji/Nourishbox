@@ -1,0 +1,584 @@
+
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stratégie & Éthique | NOURISHBOX — Présentation</title>
+    <meta name="description" content="Nourishbox : Charte d'engagement éthique et Business Model Canvas stratégique.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap"
+        rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <script>
+        tailwind.config = { theme: { extend: { colors: { n: { base: '#F9F8F4', dark: '#1F2937', green: '#064E3B', greenL: '#10B981', lightG: '#ECFDF5', gold: '#D4AF37', goldL: '#F3E5AB' } }, fontFamily: { sans: ['Inter', 'sans-serif'], serif: ['Playfair Display', 'serif'] } } } }
+    </script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #F9F8F4;
+            overflow: hidden;
+            height: 100vh;
+            color: #1F2937
+        }
+
+        [v-cloak] {
+            display: none
+        }
+
+        ::-webkit-scrollbar {
+            display: none
+        }
+
+        .slide {
+            position: absolute;
+            inset: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transform: scale(0.95) translateY(20px);
+            transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+            pointer-events: none;
+            overflow-y: auto
+        }
+
+        .slide.active {
+            opacity: 1;
+            transform: scale(1) translateY(0);
+            pointer-events: all;
+            z-index: 10
+        }
+
+        .slide.prev {
+            opacity: 0;
+            transform: scale(1.05) translateY(-20px)
+        }
+
+        .slide-inner {
+            width: 100%;
+            max-width: 1100px;
+            padding: 2rem 3rem;
+            margin: auto
+        }
+
+        .slide-inner.full {
+            max-width: 100%;
+            padding: 0
+        }
+
+        .slide-inner.wide {
+            max-width: 1300px
+        }
+
+        .gradient-text {
+            background: linear-gradient(135deg, #064E3B 0%, #10B981 50%, #D4AF37 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text
+        }
+
+        .glass {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.3)
+        }
+
+        .blob {
+            border-radius: 30% 70% 70% 30%/30% 30% 70% 70%
+        }
+
+        .nav-dots {
+            position: fixed;
+            right: 24px;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 100;
+            display: flex;
+            flex-direction: column;
+            gap: 8px
+        }
+
+        .nav-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: rgba(6, 78, 59, 0.2);
+            cursor: pointer;
+            transition: all 0.3s;
+            border: none
+        }
+
+        .nav-dot.active {
+            background: #064E3B;
+            transform: scale(1.3);
+            box-shadow: 0 0 12px rgba(6, 78, 59, 0.3)
+        }
+
+        .nav-dot:hover {
+            background: rgba(6, 78, 59, 0.5)
+        }
+
+        .nav-arrows {
+            position: fixed;
+            bottom: 32px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 100;
+            display: flex;
+            gap: 12px;
+            align-items: center
+        }
+
+        .nav-btn {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            background: white;
+            border: 1px solid #e5e7eb;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06)
+        }
+
+        .nav-btn:hover {
+            background: #064E3B;
+            color: white;
+            border-color: #064E3B;
+            transform: scale(1.1)
+        }
+
+        .nav-btn:disabled {
+            opacity: 0.3;
+            cursor: not-allowed;
+            transform: none
+        }
+
+        .nav-counter {
+            font-size: 13px;
+            font-weight: 600;
+            color: #6b7280;
+            min-width: 60px;
+            text-align: center
+        }
+
+        .pillar-card {
+            background: white;
+            border-radius: 16px;
+            padding: 2rem;
+            border: 1px solid #f3f4f6;
+            box-shadow: 0 4px 24px rgba(0, 0, 0, 0.04)
+        }
+
+        .detail-item {
+            padding-left: 1rem;
+            border-left: 2px solid #D4AF37;
+            margin-bottom: 1.25rem
+        }
+
+        .bmc-card {
+            background: white;
+            border-radius: 16px;
+            padding: 1.5rem;
+            border: 1px solid #f3f4f6;
+            box-shadow: 0 2px 16px rgba(0, 0, 0, 0.04);
+            transition: all 0.3s
+        }
+
+        .bmc-card:hover {
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
+            transform: translateY(-2px)
+        }
+
+        .fade-in {
+            animation: fadeIn 0.8s ease forwards
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(16px)
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0)
+            }
+        }
+
+        .delay-1 {
+            animation-delay: 0.15s;
+            opacity: 0
+        }
+
+        .delay-2 {
+            animation-delay: 0.3s;
+            opacity: 0
+        }
+
+        .delay-3 {
+            animation-delay: 0.45s;
+            opacity: 0
+        }
+
+        .delay-4 {
+            animation-delay: 0.6s;
+            opacity: 0
+        }
+
+        @media(max-width:768px) {
+            .slide-inner {
+                padding: 1.5rem 1.25rem
+            }
+
+            .nav-dots {
+                right: 12px;
+                gap: 6px
+            }
+
+            .nav-dot {
+                width: 8px;
+                height: 8px
+            }
+
+            .nav-arrows {
+                bottom: 16px
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app" v-cloak>
+        <!-- NAVIGATION DOTS -->
+        <div class="nav-dots hidden md:flex">
+            <button v-for="(s,i) in slideLabels" :key="i" class="nav-dot" :class="{active:current===i}" @click="goTo(i)"
+                :title="s"></button>
+        </div>
+
+        <!-- NAVIGATION ARROWS -->
+        <div class="nav-arrows">
+            <button class="nav-btn" @click="prev()" :disabled="current===0">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+                </svg>
+            </button>
+            <span class="nav-counter">{{current+1}} / {{totalSlides}}</span>
+            <button class="nav-btn" @click="next()" :disabled="current===totalSlides-1">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                </svg>
+            </button>
+        </div>
+
+        <!-- PROGRESS BAR -->
+        <div class="fixed top-0 left-0 h-1 bg-n-green/20 w-full z-50">
+            <div class="h-full bg-gradient-to-r from-n-green to-n-greenL transition-all duration-500"
+                :style="{width:progress+'%'}"></div>
+        </div>
+
+        <!-- ==================== SLIDES ==================== -->
+
+        <!-- SLIDE 0: HERO -->
+        <div class="slide" :class="slideClass(0)">
+            <div class="slide-inner full relative min-h-screen flex items-center justify-center">
+                <div class="absolute inset-0 bg-gradient-to-br from-n-lightG/40 via-n-base to-n-goldL/20"></div>
+                <div class="absolute top-20 right-0 w-96 h-96 bg-n-gold/10 blob blur-3xl animate-pulse"></div>
+                <div class="absolute bottom-0 left-0 w-80 h-80 bg-n-green/5 blob blur-3xl"></div>
+                <div class="relative z-10 text-center px-6 max-w-4xl mx-auto">
+                    <div class="mb-6 fade-in"><span
+                            class="inline-block py-1.5 px-4 border border-n-gold text-n-gold text-xs font-bold tracking-widest uppercase rounded-full bg-white/50">Vision
+                            & Stratégie 2026</span></div>
+                    <div class="text-6xl mb-4 fade-in delay-1">🌿</div>
+                    <h1
+                        class="font-serif text-4xl md:text-6xl lg:text-7xl font-bold text-n-dark leading-tight mb-6 fade-in delay-1">
+                        L'ALLIANCE DE L'ÉTHIQUE<br><span class="gradient-text italic">& DE LA PERFORMANCE</span></h1>
+                    <p class="font-serif text-xl md:text-2xl text-gray-500 font-medium mb-8 fade-in delay-2">"La
+                        Nutrition au Service de la Vie"</p>
+                    <p class="text-gray-400 text-sm fade-in delay-3">Appuyez sur <kbd
+                            class="px-2 py-0.5 bg-white rounded border text-xs">→</kbd> ou cliquez les flèches pour
+                        naviguer</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- SLIDE 1: PRÉAMBULE -->
+        <div class="slide" :class="slideClass(1)">
+            <div class="slide-inner">
+                <div class="text-center mb-10">
+                    <span class="text-n-green font-bold tracking-widest uppercase text-sm">Notre Boussole Morale</span>
+                    <h2 class="font-serif text-3xl md:text-5xl font-bold text-n-dark mt-3 mb-3">Préambule</h2>
+                    <div class="w-16 h-1 bg-n-gold mx-auto rounded-full"></div>
+                </div>
+                <div class="max-w-3xl mx-auto space-y-6 text-gray-600 text-lg leading-relaxed text-justify">
+                    <p>Nourishbox est née d'une conviction simple : bien manger ne devrait être ni un luxe, ni une
+                        contrainte logistique. En tant que Dark Kitchen spécialisée dans la nutrition par abonnement,
+                        nous avons la responsabilité de nourrir les esprits qui apprennent et les corps qui travaillent.
+                    </p>
+                    <div
+                        class="font-medium text-n-dark italic border-l-4 border-n-green pl-6 py-3 bg-n-lightG/30 rounded-r-lg text-base">
+                        Cette charte scelle le pacte de confiance entre Nourishbox et l'ensemble de son écosystème. Elle
+                        est le garant de notre intégrité, de notre excellence opérationnelle et de notre vision d'une
+                        entreprise marocaine citoyenne et innovante.
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SLIDES 2–7: CHARTE PILLARS -->
+        <div v-for="(item, i) in engagements" :key="'e'+i" class="slide" :class="slideClass(2+i)">
+            <div class="slide-inner">
+                <div class="flex items-center gap-3 mb-2">
+                    <span class="text-xs font-bold text-n-gold uppercase tracking-widest">Pilier 0{{i+1}} / 06</span>
+                    <div class="flex-1 h-px bg-n-gold/20"></div>
+                    <span class="text-n-green font-bold tracking-widest uppercase text-xs">Charte d'Engagement</span>
+                </div>
+                <div class="flex items-center gap-4 mb-6 mt-4">
+                    <div
+                        class="w-14 h-14 rounded-full bg-n-green text-white flex items-center justify-center flex-shrink-0">
+                        <span v-html="item.svg" class="w-7 h-7"></span>
+                    </div>
+                    <div>
+                        <h2 class="font-serif text-2xl md:text-3xl font-bold text-n-dark">{{item.title}}</h2>
+                        <p class="text-gray-500 font-medium">{{item.subtitle}}</p>
+                    </div>
+                </div>
+                <div v-if="item.intro"
+                    class="text-gray-500 italic border-l-2 border-n-gold pl-4 mb-6 bg-n-base py-3 rounded-r-md text-sm">
+                    {{item.intro}}</div>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                    <div v-for="(d,j) in item.details" :key="j" class="pillar-card">
+                        <h4 class="font-bold text-n-dark mb-2 flex items-center gap-2"><span
+                                class="w-2 h-2 rounded-full bg-n-gold"></span>{{d.title}}</h4>
+                        <p class="text-gray-600 text-sm leading-relaxed">{{d.text}}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SLIDE 8: BMC TITLE -->
+        <div class="slide" :class="slideClass(8)">
+            <div class="slide-inner text-center">
+                <span class="text-n-greenL font-bold tracking-widest uppercase text-sm">Architecture Stratégique</span>
+                <h2 class="font-serif text-3xl md:text-5xl font-bold text-n-dark mt-3 mb-4">Business Model Canvas</h2>
+                <div class="w-16 h-1 bg-n-gold mx-auto rounded-full mb-8"></div>
+                <p class="text-gray-500 max-w-2xl mx-auto leading-relaxed mb-10">Une approche systémique pour
+                    révolutionner la pause déjeuner au Maroc. Allier technologie, logistique du dernier kilomètre et
+                    nutrition de précision.</p>
+                <div class="grid grid-cols-3 md:grid-cols-9 gap-3 max-w-3xl mx-auto">
+                    <div v-for="(b,i) in canvasBlocks" :key="b.id"
+                        class="text-center p-3 rounded-xl bg-white border border-gray-100 shadow-sm">
+                        <div class="text-n-green font-bold text-lg">0{{i+1}}</div>
+                        <div class="text-[10px] text-gray-500 font-medium leading-tight mt-1">{{b.title}}</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SLIDES 9–11: BMC BLOCKS (3 per slide) -->
+        <div v-for="page in 3" :key="'bmc'+page" class="slide" :class="slideClass(8+page)">
+            <div class="slide-inner wide">
+                <div class="flex items-center gap-3 mb-6">
+                    <span class="text-xs font-bold text-n-greenL uppercase tracking-widest">Business Model Canvas</span>
+                    <div class="flex-1 h-px bg-n-greenL/20"></div>
+                    <span class="text-xs font-bold text-gray-400">Blocs {{(page-1)*3+1}}–{{Math.min(page*3,9)}} /
+                        9</span>
+                </div>
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-5">
+                    <div v-for="block in canvasBlocks.slice((page-1)*3, page*3)" :key="block.id" class="bmc-card">
+                        <div class="flex items-center gap-3 mb-3">
+                            <div
+                                class="w-10 h-10 rounded-xl bg-n-lightG text-n-green flex items-center justify-center flex-shrink-0">
+                                <span v-html="block.iconSvg" class="w-5 h-5"></span>
+                            </div>
+                            <div>
+                                <div class="text-[10px] font-bold text-n-gold tracking-wider uppercase">Bloc
+                                    {{block.num}}</div>
+                                <h3 class="text-base font-serif font-bold text-n-dark">{{block.title}}</h3>
+                            </div>
+                        </div>
+                        <p class="text-xs text-gray-400 italic mb-3 border-l-2 border-n-gold/40 pl-2">{{block.subtitle}}
+                        </p>
+                        <ul class="space-y-2">
+                            <li v-for="(pt,j) in block.content" :key="j"
+                                class="text-sm leading-relaxed text-gray-600 flex items-start gap-2">
+                                <span class="mt-1.5 w-1.5 h-1.5 rounded-full bg-n-greenL flex-shrink-0"></span>
+                                <span v-html="pt"></span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SLIDE 12: SCALABILITY -->
+        <div class="slide" :class="slideClass(12)">
+            <div class="slide-inner full min-h-screen flex items-center" style="background:#1F2937">
+                <div class="w-full max-w-5xl mx-auto px-6 py-12">
+                    <div class="flex flex-col md:flex-row items-center gap-12 text-white">
+                        <div class="flex-1">
+                            <span class="text-n-gold font-bold tracking-widest uppercase text-xs">Croissance &
+                                Vision</span>
+                            <h2 class="text-3xl font-serif font-bold mb-8 mt-2">Pourquoi ce modèle est scalable ?</h2>
+                            <div class="space-y-6 text-gray-300">
+                                <div class="flex items-start gap-4">
+                                    <div
+                                        class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center flex-shrink-0 text-n-gold">
+                                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
+                                        </svg>
+                                    </div>
+                                    <div>
+                                        <h4 class="text-white font-bold mb-1">Récurrence Forte</h4>
+                                        <p class="text-sm leading-relaxed">Le modèle par abonnement garantit un
+                                            cash-flow prévisible et réduit le coût d'acquisition client (CAC) sur le
+                                            long terme.</p>
+                                    </div>
+                                </div>
+                                <div class="flex items-start gap-4">
+                                    <div
+                                        class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center flex-shrink-0 text-n-gold">
+                                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                d="M19.428 15.428a2 2 0 00-1.022-.547l-2.384-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z" />
+                                        </svg>
+                                    </div>
+                                    <div>
+                                        <h4 class="text-white font-bold mb-1">Infrastructure Asset-Light</h4>
+                                        <p class="text-sm leading-relaxed">Dark Kitchens + optimisation tech des
+                                            tournées = augmentation du volume sans multiplier les coûts fixes
+                                            proportionnellement.</p>
+                                    </div>
+                                </div>
+                                <div class="flex items-start gap-4">
+                                    <div
+                                        class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center flex-shrink-0 text-n-gold">
+                                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0z" />
+                                        </svg>
+                                    </div>
+                                    <div>
+                                        <h4 class="text-white font-bold mb-1">Effet Réseau</h4>
+                                        <p class="text-sm leading-relaxed">L'offre "Family Sync" et les partenariats B2B
+                                            créent des barrières à l'entrée et viralisent l'adoption.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div
+                            class="w-full md:w-1/3 bg-white/5 rounded-2xl p-8 backdrop-blur-sm border border-white/10 text-center">
+                            <div class="mb-6">
+                                <div class="text-5xl font-serif font-bold text-n-greenL mb-2">35%</div>
+                                <div class="text-xs text-gray-400 uppercase tracking-widest font-medium">Marge Cible
+                                </div>
+                            </div>
+                            <div class="w-full h-px bg-white/10 my-6"></div>
+                            <div>
+                                <div class="text-5xl font-serif font-bold text-n-greenL mb-2">90%</div>
+                                <div class="text-xs text-gray-400 uppercase tracking-widest font-medium">Rétention Visée
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SLIDE 13: CLOSING -->
+        <div class="slide" :class="slideClass(13)">
+            <div class="slide-inner text-center">
+                <div class="text-6xl mb-6">🌿</div>
+                <h2 class="font-serif text-4xl md:text-6xl font-bold text-n-dark mb-4">NOURISHBOX</h2>
+                <p class="font-serif text-xl text-n-green italic mb-8">"La Nutrition au Service de la Vie"</p>
+                <div class="w-16 h-1 bg-n-gold mx-auto rounded-full mb-8"></div>
+                <p class="text-gray-400 text-sm max-w-md mx-auto leading-relaxed mb-6">Entreprise Marocaine
+                    Responsable.<br>La Nutrition Intelligente par Abonnement.</p>
+                <div class="flex justify-center space-x-4 mb-8">
+                    <a href="#"
+                        class="w-10 h-10 rounded-full bg-gray-100 flex items-center justify-center hover:bg-n-green hover:text-white transition text-gray-500">
+                        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                            <path
+                                d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z" />
+                        </svg>
+                    </a>
+                    <a href="#"
+                        class="w-10 h-10 rounded-full bg-gray-100 flex items-center justify-center hover:bg-n-green hover:text-white transition text-gray-500">
+                        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                            <path
+                                d="M12 2.163c3.204 0 3.584.012 4.85.072 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z" />
+                        </svg>
+                    </a>
+                </div>
+                <p class="text-xs text-gray-400 uppercase tracking-widest">&copy; 2026 Nourishbox Maroc. Tous droits
+                    réservés.</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const { createApp, ref, computed, onMounted, onBeforeUnmount } = Vue;
+        const svgIcon = (d) => `<svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="${d}"/></svg>`;
+        createApp({
+            setup() {
+                const current = ref(0);
+                const totalSlides = 14;
+                const direction = ref(1);
+                const slideLabels = ['Accueil', 'Préambule', 'Pilier 1', 'Pilier 2', 'Pilier 3', 'Pilier 4', 'Pilier 5', 'Pilier 6', 'Canvas', 'Blocs 1-3', 'Blocs 4-6', 'Blocs 7-9', 'Scalabilité', 'Fin'];
+                const progress = computed(() => ((current.value) / (totalSlides - 1)) * 100);
+
+                const slideClass = (i) => ({ active: current.value === i, prev: i < current.value });
+                const goTo = (i) => { direction.value = i > current.value ? 1 : -1; current.value = Math.max(0, Math.min(totalSlides - 1, i)) };
+                const next = () => goTo(current.value + 1);
+                const prev = () => goTo(current.value - 1);
+
+                const onKey = (e) => { if (e.key === 'ArrowRight' || e.key === 'ArrowDown' || e.key === ' ') next(); if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') prev() };
+                let touchY = 0;
+                const onTouchStart = (e) => { touchY = e.touches[0].clientY };
+                const onTouchEnd = (e) => { const d = touchY - e.changedTouches[0].clientY; if (Math.abs(d) > 50) { d > 0 ? next() : prev() } };
+
+                onMounted(() => { document.addEventListener('keydown', onKey); document.addEventListener('touchstart', onTouchStart); document.addEventListener('touchend', onTouchEnd) });
+                onBeforeUnmount(() => { document.removeEventListener('keydown', onKey); document.removeEventListener('touchstart', onTouchStart); document.removeEventListener('touchend', onTouchEnd) });
+
+                const engagements = [
+                    { title: "ENGAGEMENT ENVERS DIEU", subtitle: "L'Intégrité Absolue (Al Amana)", svg: '<svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"/></svg>', intro: "Nous plaçons notre travail sous le signe de l'excellence (Ihsan) et de la responsabilité (Mas'uliyya). Nous sommes conscients que la nourriture est un dépôt sacré (Amana) confié à nos soins.", details: [{ title: "Transparence Totale", text: "Nous nous engageons à une honnêteté radicale sur la provenance, la qualité et la composition de nos repas. Ce que nous promettons dans l'assiette est strictement ce qui est livré." }, { title: "Licéité et Pureté", text: "Nous garantissons que l'ensemble de nos processus, de l'achat des matières premières à la livraison, respecte scrupuleusement les principes éthiques et sanitaires les plus stricts." }, { title: "Le Travail comme Valeur", text: "Nous considérons notre entreprise comme un moyen de servir la communauté et de générer une richesse juste, fruit d'un effort réel et d'une valeur ajoutée tangible." }] },
+                    { title: "ENGAGEMENT ENVERS NOS CLIENTS", subtitle: "Votre Santé, Notre Mission", svg: '<svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/></svg>', intro: "Nos clients nous confient ce qu'ils ont de plus précieux : leur santé et celle de leurs enfants. Cette confiance nous oblige.", details: [{ title: "Promesse Nutritionnelle Tenue", text: "Qu'il s'agisse d'un objectif de performance sportive, de concentration étudiante ou de croissance infantile, nous nous engageons à respecter scrupuleusement les apports caloriques et nutritionnels annoncés. Pas de calories cachées, pas de compromis." }, { title: "Sécurité Alimentaire Intransigeante", text: "En tant que Dark Kitchen, l'hygiène est notre religion. Nous appliquons des protocoles de sécurité stricts (HACCP) pour garantir des repas sains, sûrs et frais, livrés dans le respect absolu de la chaîne du froid." }, { title: "Adaptabilité et Service", text: "Nous comprenons que la vie de nos clients est dynamique. Nous nous engageons à offrir un service flexible, ponctuel et à l'écoute, capable de livrer aussi bien au bureau qu'à la sortie de l'école." }] },
+                    { title: "ENGAGEMENT ENVERS LA PLANÈTE ET LA SOCIÉTÉ", subtitle: "Une Croissance Responsable", svg: '<svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>', intro: "Nous refusons de réussir au détriment de notre environnement ou de notre communauté. Nourishbox s'inscrit dans une démarche de développement durable.", details: [{ title: "Lutte contre le Gaspillage", text: "Grâce à notre modèle sur abonnement et à la précommande, nous optimisons nos stocks pour tendre vers le 'Zéro Gaspillage Alimentaire'. Les excédents éventuels sont redistribués à des associations locales." }, { title: "Emballages Raisonnés", text: "Nous nous engageons à réduire notre empreinte plastique en privilégiant progressivement des emballages biodégradables, recyclables ou consignés." }, { title: "Soutien à l'Écosystème Local", text: "Nous privilégions les circuits courts pour soutenir l'agriculture marocaine et réduire l'empreinte carbone liée au transport de nos ingrédients." }] },
+                    { title: "ENGAGEMENT ENVERS NOS FOURNISSEURS", subtitle: "Un Partenariat Gagnant-Gagnant", svg: '<svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"/></svg>', intro: "La qualité de nos plats dépend directement de la qualité des produits de nos partenaires.", details: [{ title: "Relations Équitables", text: "Nous nous engageons à traiter nos fournisseurs avec respect, à honorer nos délais de paiement et à construire des relations commerciales durables basées sur la confiance mutuelle." }, { title: "Exigence Partagée", text: "Nous sélectionnons nos partenaires sur des critères de qualité rigoureux, mais nous les accompagnons dans une démarche de progrès continu pour grandir ensemble." }] },
+                    { title: "ENGAGEMENT ENVERS NOS SALARIÉS", subtitle: "Dignité et Mérite", svg: '<svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"/></svg>', intro: "La force de Nourishbox réside dans les hommes et les femmes qui préparent et livrent les repas.", details: [{ title: "Sécurité et Respect", text: "Nous garantissons un environnement de travail sûr, sain et respectueux pour tous, du chef en cuisine au livreur sur le terrain." }, { title: "Valorisation des Talents", text: "Nous encourageons la prise d'initiative et la montée en compétence. Nous croyons que la méritocratie est le meilleur moteur de motivation." }, { title: "Esprit d'Équipe", text: "Nous cultivons une culture d'entreprise où chaque rôle est valorisé, car la satisfaction du client final est le fruit d'une chaîne de solidarité interne." }] },
+                    { title: "ENGAGEMENT ENVERS NOS ASSOCIÉS", subtitle: "Ambition et Transparence", svg: '<svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/></svg>', intro: "En tant qu'entité économique, nous avons un devoir de performance et de gestion rigoureuse envers ceux qui investissent dans notre vision.", details: [{ title: "Gestion Rigoureuse", text: "Nous nous engageons à gérer les ressources de l'entreprise avec prudence, intelligence et frugalité, en visant toujours la rentabilité et la pérennité." }, { title: "Transparence Financière", text: "Nous garantissons une communication financière claire, honnête et régulière. Les décisions stratégiques sont prises sur la base de données fiables et non d'intuitions hasardeuses." }, { title: "Ambition Visionnaire", text: "Nous nous engageons à ne jamais nous reposer sur nos acquis, à innover constamment (Tech, Logistique, Nutrition) pour faire de Nourishbox une référence nationale, et maximiser la valeur créée pour l'ensemble des parties prenantes." }] }
+                ];
+
+                const canvasBlocks = [
+                    { num: 1, id: 1, title: "Segments de clientèle", subtitle: "Qui servons-nous ?", iconSvg: svgIcon("M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"), content: ["<strong>Les 'Corporate Athletes' (B2C & B2B) :</strong> Cadres et employés de bureau (Casablanca, Tanger, zones franches) qui manquent de temps, cherchent la productivité et veulent éviter le fast-food.", "<strong>Les Parents Soucieux (Segment 'Kids') :</strong> Parents actifs (CSP+) qui veulent garantir un déjeuner sain à leurs enfants (crèches, écoles primaires privées) sans avoir à cuisiner le matin.", "<strong>Les Sportifs / Go-Getters :</strong> Adhérents de salles de sport ayant des objectifs précis (prise de masse, sèche) nécessitant un calcul macro-nutritionnel strict.", "<strong>Les Étudiants (Focus Campus) :</strong> Étudiants cherchant une alternative saine et abordable aux snacks du campus."] },
+                    { num: 2, id: 2, title: "Proposition de valeur", subtitle: "Pourquoi nous ?", iconSvg: svgIcon("M12 8v13m0-13V6a2 2 0 112 2h-2zm0 0V5.5A2.5 2.5 0 109.5 8H12zm-7 4h14M5 12a2 2 0 110-4h14a2 2 0 110 4M5 12v7a2 2 0 002 2h10a2 2 0 002-2v-7"), content: ["<strong>Pour tous : 'Zéro charge mentale'.</strong> On ne vend pas juste un repas, on vend du temps et de la santé. Abonnement flexible, livraison automatique.", "<strong>Pour les Pros :</strong> Pas de coup de fatigue l'après-midi (digestion légère).", "<strong>Pour les Parents : 'La Lunchbox de confiance'.</strong> Garantie que l'enfant mange des légumes et des produits frais.", "<strong>Pour les Sportifs : 'Nutrition de précision'.</strong> Des repas calibrés au gramme près.", "<strong>Innovation : L'offre 'Family Sync'</strong> – Parent au bureau, enfant à l'école, un seul abonnement."] },
+                    { num: 3, id: 3, title: "Canaux de distribution", subtitle: "Comment on les atteint ?", iconSvg: svgIcon("M13 16V6a1 1 0 00-1-1H4a1 1 0 00-1 1v10a1 1 0 001 1h1m8-1a1 1 0 01-1 1H9m4-1V8a1 1 0 011-1h2.586a1 1 0 01.707.293l3.414 3.414a1 1 0 01.293.707V16a1 1 0 01-1 1h-1m-6-1a1 1 0 001 1h1M5 17a2 2 0 012-2h5a2 2 0 012 2"), content: ["<strong>Plateforme Digitale (App Web/Mobile) :</strong> Le cœur du réacteur. Gestion des abonnements, choix des menus, suivi nutritionnel.", "<strong>Partenariats Physiques (Points de Drop) :</strong> Réfrigérateurs connectés ou comptoirs dédiés dans les entreprises partenaires.", "Partenariat avec les accueils des salles de sport.", "Partenariat avec les administrations des écoles/crèches.", "<strong>Flotte de Livraison Hybride :</strong> Livreurs salariés + prestataires pour les pics."] },
+                    { num: 4, id: 4, title: "Relations clients", subtitle: "Comment on les garde ?", iconSvg: svgIcon("M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"), content: ["<strong>Automatisation Personnalisée :</strong> L'algo se souvient des goûts ('Pas de coriandre pour Aymane', 'Allergie arachide pour l'enfant').", "<strong>Coaching Digital :</strong> Envoi hebdomadaire d'un bilan nutritionnel par WhatsApp ou Email.", "<strong>Communauté 'Nourishers' :</strong> Challenges santé, remises pour les parrainages, événements sportifs sponsorisés.", "<strong>Service Client Réactif :</strong> WhatsApp Business pour gérer les changements de dernière minute."] },
+                    { num: 5, id: 5, title: "Ressources clés", subtitle: "Ce qu'il nous faut", iconSvg: svgIcon("M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"), content: ["<strong>Dark Kitchen :</strong> Cuisine optimisée pour la production de masse, proche des axes routiers.", "<strong>Plateforme Tech :</strong> Algorithme de gestion des commandes et d'optimisation des tournées.", "<strong>Capital Humain :</strong> Chefs qualifiés, Nutritionniste certifié, Livreurs formés.", "<strong>Marque Forte :</strong> Identité visuelle, packaging éco-responsable et branding réseaux sociaux."] },
+                    { num: 6, id: 6, title: "Activités clés", subtitle: "Le quotidien", iconSvg: svgIcon("M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"), content: ["<strong>Production Culinaire (Batch Cooking) :</strong> Préparation des repas avec standardisation stricte.", "<strong>Logistique du 'Dernier Kilomètre' :</strong> Optimisation des routes pour livrer 100 repas en un minimum de temps.", "<strong>Sourcing & Achats :</strong> Négociation avec les fournisseurs pour garantir marge et fraîcheur.", "<strong>Contrôle Qualité & Hygiène (HACCP) :</strong> Indispensable pour rassurer les parents et les entreprises.", "<strong>Marketing & Growth Hacking :</strong> Acquisition via Meta Ads et influenceurs locaux."] },
+                    { num: 7, id: 7, title: "Partenaires clés", subtitle: "Nos alliés", iconSvg: svgIcon("M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0z"), content: ["<strong>Salles de Sport :</strong> Prescription du service aux adhérents contre commission.", "<strong>Écoles et Crèches Privées :</strong> Autorisation de livrer, communication aux parents.", "<strong>Fournisseurs Locaux (Circuit court) :</strong> Agriculteurs ou coopératives (argument RSE + coût).", "<strong>Entreprises (RH / Office Managers) :</strong> Pour entrer dans les bureaux.", "<strong>Développeurs / Agence Tech :</strong> Maintenance de l'application."] },
+                    { num: 8, id: 8, title: "Structure de coûts", subtitle: "Dépenses", iconSvg: svgIcon("M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z"), content: ["<strong>Coûts Variables :</strong> Matières premières (Food cost 25-30%), Emballages bio, Frais de livraison.", "<strong>Coûts Fixes :</strong> Loyer Dark Kitchen, Salaires, Marketing digital, Maintenance App/Site.", "<strong>CAPEX :</strong> Équipement cuisine pro, Flotte scooters/vélos électriques, Développement App."] },
+                    { num: 9, id: 9, title: "Sources de revenus", subtitle: "Comment on gagne", iconSvg: svgIcon("M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"), content: ["<strong>Abonnements (Recurring Revenue) :</strong> Formule 'Focus', 'Full Life', 'Kids'.", "<strong>Ventes B2B :</strong> Contrats cadres pour subventionner les repas employés.", "<strong>Up-selling :</strong> Snacks healthy, jus détox, petits-déjeuners.", "<strong>Frais de Livraison :</strong> Inclus premium ou facturés à part."] }
+                ];
+
+                return { current, totalSlides, slideLabels, progress, slideClass, goTo, next, prev, engagements, canvasBlocks };
+            }
+        }).mount('#app');
+    </script>
+</body>
+
+</html>
